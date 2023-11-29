@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows10.0.17763.0</TargetFramework>
+    <UseWindowsForms>True</UseWindowsForms>
+    <UseWPF>True</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="0fs5U_Vauko.png" />
+    <None Remove="icon.png" />
+    <None Remove="WinSounds.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MouseKeyHook" Version="5.7.1" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="0fs5U_Vauko.png" />
+    <Resource Include="WinSounds.png" />
+  </ItemGroup>
+
+</Project>
