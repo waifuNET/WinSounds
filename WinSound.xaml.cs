@@ -78,7 +78,8 @@ namespace WinSounds
 			UI_Mood_Click.IsChecked = Settings.userSettings.CLICK;
 			UI_Mood_Volume.Value = Settings.userSettings.VOLUME;
 			UI_Mood_ClickWheel.IsChecked = Settings.userSettings.MOUSE_WHEEL;
-
+			UI_SOLO_TRACK.IsChecked = Settings.userSettings.SOLO_TRACK;
+			UI_SOLO_AUTOLOAD.IsChecked = Settings.userSettings.AUTO_LOAD;
 		}
 
 		public void UIVisibility(Visibility visibility)
@@ -170,6 +171,7 @@ namespace WinSounds
 
 		public void UpdateListUI()
 		{
+			Settings.LoadMoods();
 			UI_MoodsList.Items.Clear();
 			foreach (Mood mood in Settings.moods)
 			{
@@ -204,6 +206,15 @@ namespace WinSounds
 		{
 			if (updateValues)
 				Settings.userSettings.MOUSE_WHEEL = (bool)UI_Mood_ClickWheel.IsChecked;
+		}
+
+		private void UI_SOLO_AUTOLOAD_Checked(object sender, RoutedEventArgs e)
+		{
+			if (updateValues)
+			{
+				Settings.userSettings.AUTO_LOAD = (bool)UI_SOLO_AUTOLOAD.IsChecked;
+				AutoLoad.SetAutorunValue(Settings.userSettings.AUTO_LOAD);
+			}
 		}
 	}
 }

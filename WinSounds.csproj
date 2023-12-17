@@ -5,6 +5,12 @@
     <TargetFramework>net7.0-windows10.0.17763.0</TargetFramework>
     <UseWindowsForms>True</UseWindowsForms>
     <UseWPF>True</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
+    <ApplicationIcon>WinSounds.ico</ApplicationIcon>
+    <IsPublishable>True</IsPublishable>
+    <SignAssembly>False</SignAssembly>
+    <Copyright>WaifNET</Copyright>
+    <RepositoryUrl>https://github.com/waifuNET/WinSounds</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,13 +20,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="WinSounds.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MouseKeyHook" Version="5.7.1" />
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="0fs5U_Vauko.png" />
     <Resource Include="WinSounds.png" />
   </ItemGroup>
 

@@ -51,6 +51,7 @@ namespace WinSounds
 	public class UserSettings
 	{
 		public string CURRENT_MOOD { get; set; }
+		public bool AUTO_LOAD { get; set; }
 		public bool SOLO_TRACK { get; set; }
 
 		public bool CLICK { get; set; }
@@ -112,7 +113,7 @@ namespace WinSounds
 		{
 			if (!File.Exists("./UserSettings.json"))
 			{
-				userSettings = new UserSettings { MOUSE_WHEEL = false, CURRENT_MOOD = currentMood.PATH, CLICK = false, SOLO_TRACK = false, TYPING_BACKSPACE = true, TYPING_ENTER = true, TYPING_LETTER = true, TYPING_SPACE = true, VOLUME = 1, WINDOW_CLOSE = true, WINDOW_OPEN = true, };
+				userSettings = new UserSettings { MOUSE_WHEEL = false, CURRENT_MOOD = currentMood.PATH, CLICK = false, SOLO_TRACK = false, TYPING_BACKSPACE = true, TYPING_ENTER = true, TYPING_LETTER = true, TYPING_SPACE = true, VOLUME = 1, WINDOW_CLOSE = true, WINDOW_OPEN = true, AUTO_LOAD = true };
 				SaveSettings();
 			}
 
@@ -125,6 +126,7 @@ namespace WinSounds
 			}
 
 			userSettings = JsonConvert.DeserializeObject<UserSettings>(jsonFile);
+			AutoLoad.SetAutorunValue(userSettings.AUTO_LOAD);
 		}
 
 		public static void LoadCurrentMood()
