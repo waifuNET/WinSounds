@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using WinSounds.Keyboard.Classes;
+using Application = System.Windows.Forms.Application;
 
 namespace WinSounds
 {
@@ -19,5 +22,6 @@ namespace WinSounds
 			//Application.Run(new Form1());
 			appManager.Load();
 		}
+
 	}
 }

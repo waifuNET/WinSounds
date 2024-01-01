@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -167,23 +168,30 @@ namespace WinSounds
 		public static void LoadMoods()
 		{
 			List<string> temp_moods = new List<string>();
-			string[] pathMoods = Directory.GetDirectories(".\\Moods");
+			string[] pathMoods = Directory.GetDirectories(APP_PATH + @"\Moods");
 			foreach (string i in pathMoods)
 			{
 				if (loadedMoods.IndexOf(i) == -1) temp_moods.Add(i);
 				else
 				{
-					foreach (Mood m in moods)
-					{
-						if (m.PATH == i) moods.Remove(m);
-					}
+					//foreach (Mood m in moods)
+					//{
+					//	if (m.NAME == i) moods.Remove(m);
+					//}
 				}
 			}
 			pathMoods = temp_moods.ToArray();
+			for (int i = 0; i < pathMoods.Length; i++)
+			{
+				pathMoods[i] = pathMoods[i].Replace(@".\", String.Empty);
+			}
 			foreach (string moodPath in pathMoods)
 			{
 				string moodFile = Path.Join(moodPath, "Mood.json");
-				if (!File.Exists(moodFile)) break;
+				if (!File.Exists(moodFile))
+				{
+					break;
+				}
 
 				string jsonFile = "";
 				using (FileStream fstream = File.OpenRead(moodFile))
@@ -194,9 +202,9 @@ namespace WinSounds
 				}
 
 				Mood tempMood = JsonConvert.DeserializeObject<Mood>(jsonFile);
-				tempMood.PATH = Path.Join(APP_PATH, moodPath);
-				moods.Add(tempMood);
+				tempMood.PATH = moodPath;
 
+				moods.Add(tempMood);
 				loadedMoods.Add(moodPath);
 			}
 		}

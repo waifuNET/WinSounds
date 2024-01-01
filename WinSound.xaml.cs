@@ -47,7 +47,7 @@ namespace WinSounds
 				UIVisibility(Visibility.Visible);
 				string icon = System.IO.Path.Join(mood.PATH, "icon.png");
 
-				UI_Mood_Icon.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+				UI_Mood_Icon.Source = new BitmapImage(new Uri(icon));
 				UI_Mood_Name.Content = mood.NAME;
 				UI_Mood_Discription.Content = mood.NAME;
 

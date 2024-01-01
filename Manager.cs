@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -13,11 +14,29 @@ namespace WinSounds
 		public WinSoundsManager winSoundsManager = new WinSoundsManager();
 		public void Load()
 		{
+			AUTOloadFix();
+
 			InitFolders();
 			sounds.Init();
 			Settings.Init();
 
 			Application.Run(winSoundsManager);
+		}
+
+		public static void AUTOloadFix()
+		{
+			while (true)
+			{
+				if (AutoLoad.SessionCheck() != null)
+				{
+					return;
+				}
+				else
+				{
+					Thread.Sleep(1000);
+				}
+				return;
+			}
 		}
 
 		public void InitFolders()
