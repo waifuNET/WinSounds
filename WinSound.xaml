@@ -5,30 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinSounds"
         mc:Ignorable="d"
-        Title="WinSound" Height="273" Width="426" Loaded="Window_Loaded" Closing="Window_Closing" Icon="/WinSounds.png" Topmost="True">
+        Title="WinSound" Height="300
+        " Width="545" Loaded="Window_Loaded" Closing="Window_Closing" Icon="/WinSounds.png" Topmost="True">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="89*"/>
-            <ColumnDefinition Width="337*"/>
+            <ColumnDefinition Width="147*"/>
+            <ColumnDefinition Width="391*"/>
         </Grid.ColumnDefinitions>
-        <CheckBox x:Name="UI_SOLO_TRACK" Content="SOLO TRACK" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Margin="10,10,0,0" MinWidth="100" Checked="UI_SOLO_TRACK_Checked" Unchecked="UI_SOLO_TRACK_Checked" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="UI_MoodsList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,32,0,43" MinWidth="30" HorizontalAlignment="Left" Width="137" SelectionChanged="UI_MoodsList_SelectionChanged" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
-        <Image x:Name="UI_Mood_Icon" Height="50" Margin="63,32,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" Grid.Column="1"/>
-        <Label x:Name="UI_Mood_Name" Content="Name" HorizontalAlignment="Left" Margin="111,32,0,0" VerticalAlignment="Top" Width="190" FontSize="16" Grid.Column="1"/>
-        <Label x:Name="UI_Mood_Discription" Content="Discription" HorizontalAlignment="Left" Margin="111,61,0,0" VerticalAlignment="Top" Width="190" Grid.Column="1"/>
-        <CheckBox x:Name="UI_Mood_Click" Content="CLICK" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="198,136,0,0" MinWidth="100" Checked="UI_Mood_Click_Checked" Unchecked="UI_Mood_Click_Checked" Grid.Column="1"/>
-        <CheckBox x:Name="UI_Mood_WindowClose" Content="WINDOW CLOSE" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="198,92,0,0" MinWidth="100" IsChecked="True" Checked="UI_Mood_WindowClose_Checked" Unchecked="UI_Mood_WindowClose_Checked" Grid.Column="1"/>
-        <CheckBox x:Name="UI_Mood_WindowOpen" Content="WINDOW OPEN" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="198,114,0,0" MinWidth="100" IsChecked="True" Checked="UI_Mood_WindowOpen_Checked" Unchecked="UI_Mood_WindowOpen_Checked" Grid.Column="1"/>
-        <CheckBox x:Name="UI_Mood_Backspace" Content="TYPING BACKSPACE" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="63,92,0,0" MinWidth="100" Checked="UI_Mood_Backspace_Checked" IsChecked="True" Unchecked="UI_Mood_Backspace_Checked" Grid.Column="1"/>
-        <CheckBox x:Name="UI_Mood_Space" Content="TYPING SPACE" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="63,158,0,0" MinWidth="100" IsChecked="True" Checked="UI_Mood_Space_Checked" Unchecked="UI_Mood_Space_Checked" Grid.Column="1"/>
-        <CheckBox x:Name="UI_Mood_Letter" Content="TYPING LETTER" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="63,136,0,0" MinWidth="100" IsChecked="True" Checked="UI_Mood_Letter_Checked" Unchecked="UI_Mood_Letter_Checked" Grid.Column="1"/>
-        <CheckBox x:Name="UI_Mood_Enter" Content="TYPING ENTER" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="63,114,0,0" MinWidth="100" IsChecked="True" Checked="UI_Mood_Enter_Checked" Unchecked="UI_Mood_Enter_Checked" Grid.Column="1"/>
-        <Slider x:Name="UI_Mood_Volume" HorizontalAlignment="Left" Margin="63,180,0,0" VerticalAlignment="Top" Width="115" Maximum="1" SmallChange="0.01" LargeChange="0.1" Value="1" ValueChanged="Slider_ValueChanged" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="1"/>
+        <CheckBox x:Name="UI_SOLO_TRACK" Content="SOLO TRACK" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Margin="10,10,0,0" MinWidth="100" Checked="UI_SOLO_TRACK_Checked" Unchecked="UI_SOLO_TRACK_Checked"/>
+        <ListBox x:Name="UI_MoodsList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,32,0,43" MinWidth="30" HorizontalAlignment="Left" Width="137" SelectionChanged="UI_MoodsList_SelectionChanged" BorderBrush="{x:Null}"/>
+        <Image x:Name="UI_Mood_Icon" Height="50" Margin="10,32,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" Grid.Column="1"/>
+        <Label x:Name="UI_Mood_Name" Content="Name" HorizontalAlignment="Left" Margin="63,24,0,0" VerticalAlignment="Top" Width="190" FontSize="16" Grid.Column="1" Height="32"/>
+        <Label x:Name="UI_Mood_Discription" Content="Discription" HorizontalAlignment="Left" Margin="63,46,0,0" VerticalAlignment="Top" Width="190" Grid.Column="1" Height="26"/>
+        <CheckBox x:Name="UI_Mood_Click" Content="CLICK" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="145,136,0,0" MinWidth="100" Checked="UI_Mood_Click_Checked" Unchecked="UI_Mood_Click_Checked" Grid.Column="1"/>
+        <CheckBox x:Name="UI_Mood_WindowClose" Content="WINDOW CLOSE" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="145,92,0,0" MinWidth="100" IsChecked="True" Checked="UI_Mood_WindowClose_Checked" Unchecked="UI_Mood_WindowClose_Checked" Grid.Column="1"/>
+        <CheckBox x:Name="UI_Mood_WindowOpen" Content="WINDOW OPEN" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="145,114,0,0" MinWidth="100" IsChecked="True" Checked="UI_Mood_WindowOpen_Checked" Unchecked="UI_Mood_WindowOpen_Checked" Grid.Column="1"/>
+        <CheckBox x:Name="UI_Mood_Backspace" Content="TYPING BACKSPACE" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="10,92,0,0" MinWidth="100" Checked="UI_Mood_Backspace_Checked" IsChecked="True" Unchecked="UI_Mood_Backspace_Checked" Grid.Column="1"/>
+        <CheckBox x:Name="UI_Mood_Space" Content="TYPING SPACE" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="10,158,0,0" MinWidth="100" IsChecked="True" Checked="UI_Mood_Space_Checked" Unchecked="UI_Mood_Space_Checked" Grid.Column="1"/>
+        <CheckBox x:Name="UI_Mood_Letter" Content="TYPING LETTER" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="10,136,0,0" MinWidth="100" IsChecked="True" Checked="UI_Mood_Letter_Checked" Unchecked="UI_Mood_Letter_Checked" Grid.Column="1"/>
+        <CheckBox x:Name="UI_Mood_Enter" Content="TYPING ENTER" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="10,114,0,0" MinWidth="100" IsChecked="True" Checked="UI_Mood_Enter_Checked" Unchecked="UI_Mood_Enter_Checked" Grid.Column="1"/>
+        <Slider x:Name="UI_Mood_Volume" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="115" Maximum="1" SmallChange="0.01" LargeChange="0.1" Value="1" ValueChanged="Slider_ValueChanged" BorderBrush="{x:Null}" Background="{x:Null}" Grid.Column="1" Height="18"/>
         <Button x:Name="UI_ButtonInstall" Content="INSTALL" Margin="0,0,10,10" FontSize="10" HorizontalAlignment="Right" Width="49" Height="18" VerticalAlignment="Bottom" Click="UI_ButtonInstall_Click" Background="#FFDDDDDD" BorderBrush="{x:Null}" Grid.Column="1"/>
-        <Button x:Name="UI_ButtonUpdate" Content="UPDATE" Margin="79,0,0,10" VerticalAlignment="Bottom" Height="28" Click="UI_ButtonUpdate_Click" HorizontalAlignment="Left" Width="68" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
-        <Button x:Name="UI_ButtonOpenFolder" Content="OPEN" Margin="0,0,0,10" Click="UI_ButtonOpenFolder_Click" HorizontalAlignment="Center" Width="69" BorderBrush="{x:Null}" Height="28" VerticalAlignment="Bottom"/>
-        <CheckBox x:Name="UI_Mood_ClickWheel" Content="MOUSE WHEEL" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="197,159,0,0" MinWidth="100" Checked="UI_Mood_ClickWheel_Checked" Unchecked="UI_Mood_ClickWheel_Checked" Grid.Column="1"/>
-        <CheckBox x:Name="UI_SOLO_AUTOLOAD" Content="AUTO LOAD" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Margin="26,10,0,0" MinWidth="100" Unchecked="UI_SOLO_TRACK_Checked" Grid.Column="1" Checked="UI_SOLO_AUTOLOAD_Checked"/>
+        <Button x:Name="UI_ButtonUpdate" Content="UPDATE" Margin="0,0,1,10" Click="UI_ButtonUpdate_Click" BorderBrush="{x:Null}" HorizontalAlignment="Right" Width="68" Height="28" VerticalAlignment="Bottom"/>
+        <Button x:Name="UI_ButtonOpenFolder" Content="OPEN" Margin="6,0,74,10" Click="UI_ButtonOpenFolder_Click" BorderBrush="{x:Null}" Height="28" VerticalAlignment="Bottom"/>
+        <CheckBox x:Name="UI_Mood_ClickWheel" Content="MOUSE WHEEL" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="145,159,0,0" MinWidth="100" Checked="UI_Mood_ClickWheel_Checked" Unchecked="UI_Mood_ClickWheel_Checked" Grid.Column="1"/>
+        <CheckBox x:Name="UI_SOLO_AUTOLOAD" Content="AUTO LOAD" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Margin="115,10,0,0" MinWidth="100" Unchecked="UI_SOLO_TRACK_Checked" Checked="UI_SOLO_AUTOLOAD_Checked" Grid.ColumnSpan="2"/>
+        <ListBox Height="130" x:Name="Processes" Margin="265,10,9,0" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="1" SelectionChanged="Processes_SelectionChanged"/>
+        <ListBox Height="106" x:Name="ProcessesIgnored" Margin="265,145,9,0" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="1" SelectionChanged="ProcessesIgnored_SelectionChanged"/>
 
     </Grid>
 </Window>

@@ -64,9 +64,11 @@ namespace WinSounds
 		public bool TYPING_LETTER { get; set; }
 		public bool TYPING_SPACE { get; set; }
 		public float VOLUME { get; set; }
+		public List<string> IGNORED_PROCESSES { get; set; }
 	}
 	static class Settings
 	{
+		public static List<string> ignored_proc = new List<string>() { "Idle", "svhost", "WinSounds", "System", "Secure System", "Registry", "smss", "csrss" };
 		public static UserSettings userSettings = new UserSettings();
 
 		public static string APP_PATH = AppDomain.CurrentDomain.BaseDirectory;
@@ -114,7 +116,7 @@ namespace WinSounds
 		{
 			if (!File.Exists("./UserSettings.json"))
 			{
-				userSettings = new UserSettings { MOUSE_WHEEL = false, CURRENT_MOOD = currentMood.PATH, CLICK = false, SOLO_TRACK = false, TYPING_BACKSPACE = true, TYPING_ENTER = true, TYPING_LETTER = true, TYPING_SPACE = true, VOLUME = 1, WINDOW_CLOSE = true, WINDOW_OPEN = true, AUTO_LOAD = true };
+				userSettings = new UserSettings { MOUSE_WHEEL = false, CURRENT_MOOD = currentMood.PATH, CLICK = false, SOLO_TRACK = false, TYPING_BACKSPACE = true, TYPING_ENTER = true, TYPING_LETTER = true, TYPING_SPACE = true, VOLUME = 1, WINDOW_CLOSE = true, WINDOW_OPEN = true, AUTO_LOAD = true, IGNORED_PROCESSES = new List<string>() };
 				SaveSettings();
 			}
 
@@ -128,6 +130,9 @@ namespace WinSounds
 
 			userSettings = JsonConvert.DeserializeObject<UserSettings>(jsonFile);
 			AutoLoad.SetAutorunValue(userSettings.AUTO_LOAD);
+			if(userSettings.IGNORED_PROCESSES == null) {
+				userSettings.IGNORED_PROCESSES = new List<string>();
+			}
 		}
 
 		public static void LoadCurrentMood()

@@ -16,14 +16,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WinSounds
 {
 	/// <summary>
 	/// Логика взаимодействия для WinSound.xaml
 	/// </summary>
-	public partial class WinSound : Window
-	{
+	public partial class WinSound : System.Windows.Window
+    {
 		public WinSound()
 		{
 			InitializeComponent();
@@ -36,6 +37,8 @@ namespace WinSounds
 		{
 			UpdateListUI();
 			UpdateSelectedUI(Settings.currentMood);
+			Timer();
+			timer_Tick(new object(), new EventArgs());
 		}
 
 		public void UpdateSelectedUI(Mood mood)
@@ -97,6 +100,46 @@ namespace WinSounds
 			UI_Mood_WindowOpen.Visibility = visibility;
 			UI_Mood_WindowClose.Visibility = visibility;
 			UI_Mood_ClickWheel.Visibility = visibility;
+		}
+
+		public void Timer()
+		{
+			DispatcherTimer timer = new DispatcherTimer();
+			timer.Tick += new EventHandler(timer_Tick);
+			timer.Interval = new TimeSpan(0, 0, 3);
+			timer.Start();
+		}
+		private int processIdRefresh = 0;
+		private void timer_Tick(object sender, EventArgs e)
+		{
+			int IdRefresh = 0;
+			string[] processCollection = Array.ConvertAll(Process.GetProcesses(), x => x.ProcessName);
+
+			IEnumerable<string> processFiltred = processCollection.Except(Settings.ignored_proc);
+			processFiltred = processFiltred.Except(Settings.userSettings.IGNORED_PROCESSES);
+
+			ProcessesIgnored.Items.Clear();
+			foreach (string proc in Settings.userSettings.IGNORED_PROCESSES)
+			{
+				ProcessesIgnored.Items.Add(proc);
+			}
+
+			IEnumerable<string> bans = processCollection.Intersect(Settings.userSettings.IGNORED_PROCESSES);
+
+			Program.appManager.sounds.mute = bans.ToArray().Length > 0;
+
+			foreach (string st in processFiltred)
+			{
+				IdRefresh += st[0];
+			}
+			if (IdRefresh == processIdRefresh) { return; }
+			else { processIdRefresh = IdRefresh; }
+
+			Processes.Items.Clear();
+			foreach (string proc in processFiltred)
+			{
+				Processes.Items.Add(proc);
+			}
 		}
 
 		private void UI_Mood_Backspace_Checked(object sender, RoutedEventArgs e)
@@ -214,6 +257,26 @@ namespace WinSounds
 			{
 				Settings.userSettings.AUTO_LOAD = (bool)UI_SOLO_AUTOLOAD.IsChecked;
 				AutoLoad.SetAutorunValue(Settings.userSettings.AUTO_LOAD);
+			}
+		}
+
+		private void Processes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if(Processes.SelectedIndex != -1)
+			{
+				Settings.userSettings.IGNORED_PROCESSES.Add(Processes.Items.GetItemAt(Processes.SelectedIndex).ToString());
+				processIdRefresh += 1;
+				timer_Tick(new object(), new EventArgs());
+			}
+		}
+
+		private void ProcessesIgnored_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (ProcessesIgnored.SelectedIndex != -1)
+			{
+				Settings.userSettings.IGNORED_PROCESSES.Remove(ProcessesIgnored.Items.GetItemAt(ProcessesIgnored.SelectedIndex).ToString());
+				processIdRefresh += 1;
+				timer_Tick(new object(), new EventArgs());
 			}
 		}
 	}

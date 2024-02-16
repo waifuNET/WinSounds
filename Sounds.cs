@@ -11,6 +11,8 @@ using System.Threading;
 using System.Diagnostics;
 using System.Windows.Automation;
 using Gma.System.MouseKeyHook;
+using System.Timers;
+using System.Windows.Threading;
 
 namespace WinSounds
 {
@@ -18,6 +20,7 @@ namespace WinSounds
 	{
 		private Random random = new Random();
 		private string lastSoud = null;
+		public bool mute = false;
 		public void Init()
 		{
             Keyboard.Classes.Hook.Start(KeyBoardSound, MouseSoud);
@@ -25,6 +28,7 @@ namespace WinSounds
 		}
 		public void MouseSoud(MouseButtons mouse)
 		{
+			if (mute) return;
 			switch(mouse)
 			{
 				case MouseButtons.Right:
@@ -40,6 +44,7 @@ namespace WinSounds
 		}
 		public void KeyBoardSound(int key)
 		{
+			if (mute) return;
 			switch (key)
 			{
 				case Keyboard.Classes.Keys.VK_BACK:
@@ -64,6 +69,7 @@ namespace WinSounds
 
 		public void WindowSound(WindowHookEnum status)
 		{
+			if (mute) return;
 			switch (status)
 			{
 				case WindowHookEnum.OPEN:
@@ -108,10 +114,7 @@ namespace WinSounds
 			{
 				return;
 			}
-
 			waveOut.Stop();
-
 		}
-
 	}
 }
