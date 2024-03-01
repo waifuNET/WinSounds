@@ -86,11 +86,12 @@ namespace WinSounds
 		public string RandomSound(List<string> sounds)
 		{
 			if (sounds == null || sounds.Count <= 0) return null;
-			return sounds[random.Next(0, sounds.Count)];
+			return sounds[random.Next(0, sounds.Count - 1)];
 		}
 
 		public void PlaySound(string path)
 		{
+			if (path == null) return;
 			SoundModel waveOut;
 			if (!Settings.currentMoodSounds.TryGetValue(path, out waveOut))
 			{

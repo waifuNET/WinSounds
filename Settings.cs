@@ -48,6 +48,14 @@ namespace WinSounds
 			waveOut.Stop();
 			reader.Seek(0, SeekOrigin.Begin);
 		}
+		public void Clear()
+		{
+			waveOut.Stop();
+			waveOut.Dispose();
+
+			reader.Close();
+			reader.Dispose();
+		}
 	}
 	public class UserSettings
 	{
@@ -138,6 +146,10 @@ namespace WinSounds
 
 		public static void LoadCurrentMood()
 		{
+			foreach(KeyValuePair<string, SoundModel> mood in currentMoodSounds)
+			{
+				mood.Value.Clear();
+			}
 			currentMoodSounds.Clear();
 			List<List<string>> sounds = new List<List<string>> {
 				currentMood.CLICK,
@@ -152,15 +164,23 @@ namespace WinSounds
 
 			foreach (List<string> s in sounds)
 			{
-				if (s != null)
+				if (s != null && s.Count > 0)
 					foreach (string v in s)
 					{
-						string file = Path.Join(Settings.currentMood.PATH, v);
-						if (!File.Exists(file)) continue;
-
-						currentMoodSounds.Add(v, new SoundModel(file));
+						try
+						{
+							string file = Path.Join(Settings.currentMood.PATH, v);
+							if (!File.Exists(file)) continue;
+							currentMoodSounds.Add(v, new SoundModel(file));
+						}
+						catch(Exception ex)
+						{
+							MessageBox.Show(ex.Message);
+							continue;
+						}
 					}
 			}
+
 		}
 
 		public static void Init()
