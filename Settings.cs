@@ -64,6 +64,7 @@ namespace WinSounds
 		public bool TYPING_LETTER { get; set; }
 		public bool TYPING_SPACE { get; set; }
 		public float VOLUME { get; set; }
+		public bool HOLDING { get; set; }
 		public List<string> IGNORED_PROCESSES { get; set; }
 	}
 	static class Settings
@@ -116,7 +117,7 @@ namespace WinSounds
 		{
 			if (!File.Exists("./UserSettings.json"))
 			{
-				userSettings = new UserSettings { MOUSE_WHEEL = false, CURRENT_MOOD = currentMood.PATH, CLICK = false, SOLO_TRACK = false, TYPING_BACKSPACE = true, TYPING_ENTER = true, TYPING_LETTER = true, TYPING_SPACE = true, VOLUME = 1, WINDOW_CLOSE = true, WINDOW_OPEN = true, AUTO_LOAD = true, IGNORED_PROCESSES = new List<string>() };
+				userSettings = new UserSettings { MOUSE_WHEEL = false, CURRENT_MOOD = currentMood.PATH, CLICK = false, SOLO_TRACK = false, TYPING_BACKSPACE = true, TYPING_ENTER = true, TYPING_LETTER = true, TYPING_SPACE = true, VOLUME = 1, HOLDING = false, WINDOW_CLOSE = true, WINDOW_OPEN = true, AUTO_LOAD = true, IGNORED_PROCESSES = new List<string>() };
 				SaveSettings();
 			}
 

@@ -32,6 +32,7 @@
         <CheckBox x:Name="UI_SOLO_AUTOLOAD" Content="AUTO LOAD" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Margin="115,10,0,0" MinWidth="100" Unchecked="UI_SOLO_TRACK_Checked" Checked="UI_SOLO_AUTOLOAD_Checked" Grid.ColumnSpan="2"/>
         <ListBox x:Name="Processes" Margin="265,10,9,0" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="1" SelectionChanged="Processes_SelectionChanged" Height="130" VerticalAlignment="Top"/>
         <ListBox Height="106" x:Name="ProcessesIgnored" Margin="265,145,9,0" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="1" SelectionChanged="ProcessesIgnored_SelectionChanged"/>
+        <CheckBox x:Name="UI_HOLDING" Content="HOLDING" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Margin="58,10,0,0" MinWidth="100" Unchecked="UI_HOLDING_Checked" Checked="UI_HOLDING_Checked" Grid.Column="1"/>
 
     </Grid>
 </Window>

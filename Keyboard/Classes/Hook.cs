@@ -64,15 +64,22 @@ namespace WinSounds.Keyboard.Classes
 			m_GlobalHook.Dispose();
 		}
 
+        private static int lastParam = 0;
         public static IntPtr hookProc(int code, IntPtr wParam, IntPtr lParam)
         {
             try
             {
-                if (code >= 0 && wParam == (IntPtr)0x100 || code >= 0 && wParam == (IntPtr)260)
+                if ((code >= 0 && wParam == (IntPtr)0x101 || code >= 0 && wParam == (IntPtr)260) && (lastParam != 0x101 || Settings.userSettings.HOLDING))
                 {
-                    int vkCode = Marshal.ReadInt32(lParam);
-                    function(vkCode);
+                    lastParam = 0x101;
                 }
+                else if ((code >= 0 && wParam == (IntPtr)0x100 || code >= 0 && wParam == (IntPtr)260) && (lastParam != 0x100 || Settings.userSettings.HOLDING))
+				{
+                    lastParam = 0x100;
+
+					int vkCode = Marshal.ReadInt32(lParam);
+					function(vkCode);
+				}
                 return IntPtr.Zero;
             }
             catch

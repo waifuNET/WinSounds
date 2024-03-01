@@ -82,6 +82,7 @@ namespace WinSounds
 			UI_Mood_Volume.Value = Settings.userSettings.VOLUME;
 			UI_Mood_ClickWheel.IsChecked = Settings.userSettings.MOUSE_WHEEL;
 			UI_SOLO_TRACK.IsChecked = Settings.userSettings.SOLO_TRACK;
+			UI_HOLDING.IsChecked = Settings.userSettings.HOLDING;
 			UI_SOLO_AUTOLOAD.IsChecked = Settings.userSettings.AUTO_LOAD;
 		}
 
@@ -238,6 +239,12 @@ namespace WinSounds
 			if (updateValues)
 				Settings.userSettings.SOLO_TRACK = (bool)UI_SOLO_TRACK.IsChecked;
 
+		}
+
+		private void UI_HOLDING_Checked(object sender, RoutedEventArgs e)
+		{
+			if(updateValues)
+				Settings.userSettings.HOLDING = (bool)UI_HOLDING.IsChecked;
 		}
 
 		private void UI_ButtonOpenFolder_Click(object sender, RoutedEventArgs e)
