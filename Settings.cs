@@ -218,7 +218,7 @@ namespace WinSounds
 				string moodFile = Path.Join(moodPath, "Mood.json");
 				if (!File.Exists(moodFile))
 				{
-					break;
+					continue;
 				}
 
 				string jsonFile = "";
