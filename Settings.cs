@@ -77,6 +77,8 @@ namespace WinSounds
 	}
 	static class Settings
 	{
+		public static bool MUTE = false;
+
 		public static List<string> ignored_proc = new List<string>() { "Idle", "svhost", "WinSounds", "System", "Secure System", "Registry", "smss", "csrss" };
 		public static UserSettings userSettings = new UserSettings();
 

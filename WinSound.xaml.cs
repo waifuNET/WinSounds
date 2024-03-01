@@ -127,7 +127,7 @@ namespace WinSounds
 
 			IEnumerable<string> bans = processCollection.Intersect(Settings.userSettings.IGNORED_PROCESSES);
 
-			Program.appManager.sounds.mute = bans.ToArray().Length > 0;
+			Settings.MUTE = bans.ToArray().Length > 0;
 
 			foreach (string st in processFiltred)
 			{
