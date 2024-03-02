@@ -46,6 +46,13 @@ namespace WinSounds.Keyboard.Classes
 			IntPtr hInstance = LoadLibrary("User32");
             hhook = SetWindowsHookEx(WH_KEYBOARD_LL, _proc, hInstance, 0);
 
+            if (Settings.userSettings.MOUSE_WHEEL || Settings.userSettings.CLICK)
+            {
+                MouseHook();
+			}
+		}
+        public static void MouseHook()
+        {
 			m_GlobalHook = Gma.System.MouseKeyHook.Hook.GlobalEvents();
 			m_GlobalHook.MouseDownExt += MoseClick;
 			m_GlobalHook.MouseWheelExt += MoseClick;
@@ -57,10 +64,12 @@ namespace WinSounds.Keyboard.Classes
 		public static void Stop()
         {
             UnhookWindowsHookEx(hhook);
+		}
+        public static void MouseDisponse()
+        {
 			m_GlobalHook.MouseDownExt -= MoseClick;
 			m_GlobalHook.MouseWheelExt -= MoseClick;
 
-			//It is recommened to dispose it
 			m_GlobalHook.Dispose();
 		}
 

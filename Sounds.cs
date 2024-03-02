@@ -19,16 +19,15 @@ namespace WinSounds
 	class Sounds
 	{
 		private Random random = new Random();
-		private string lastSoud = null;
 		public void Init()
 		{
-            Keyboard.Classes.Hook.Start(KeyBoardSound, MouseSoud);
+			Keyboard.Classes.Hook.Start(KeyBoardSound, MouseSoud);
 			WindowHook.Init(WindowSound);
 		}
 		public void MouseSoud(MouseButtons mouse)
 		{
 			if (Settings.MUTE) return;
-			switch(mouse)
+			switch (mouse)
 			{
 				case MouseButtons.Right:
 				case MouseButtons.Left:
@@ -91,30 +90,16 @@ namespace WinSounds
 		public void PlaySound(string path)
 		{
 			if (path == null) return;
-			SoundModel waveOut;
-			if (!Settings.currentMoodSounds.TryGetValue(path, out waveOut))
+			foreach(KeyValuePair<string, SoundModel> sound in Settings.currentMoodSounds) if (Settings.userSettings.SOLO_TRACK) sound.Value.StopAll();
+			for (int i = 0; i < Settings.currentMoodSounds.Count; i++)
 			{
-				return;
+				if (Settings.currentMoodSounds.ContainsKey(path))
+				{
+					Settings.currentMoodSounds[path].Play();
+					break;
+				}
 			}
 
-			if (Settings.userSettings.SOLO_TRACK)
-				StopSound(lastSoud);
-
-			lastSoud = path;
-			waveOut.Play();
-		}
-
-		public void StopSound(string path)
-		{
-
-			if (path == null) return;
-
-			SoundModel waveOut;
-			if (!Settings.currentMoodSounds.TryGetValue(path, out waveOut))
-			{
-				return;
-			}
-			waveOut.Stop();
 		}
 	}
 }

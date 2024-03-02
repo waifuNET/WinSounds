@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gma.System.MouseKeyHook;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -184,14 +185,15 @@ namespace WinSounds
 				Settings.userSettings.WINDOW_OPEN = (bool)UI_Mood_WindowOpen.IsChecked;
 
 		}
-
 		private void UI_Mood_Click_Checked(object sender, RoutedEventArgs e)
 		{
 			if (updateValues)
+			{
 				Settings.userSettings.CLICK = (bool)UI_Mood_Click.IsChecked;
+				Settings.MouseHookCheck();
+			}
 
 		}
-
 		private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
 			if (updateValues)
@@ -255,7 +257,10 @@ namespace WinSounds
 		private void UI_Mood_ClickWheel_Checked(object sender, RoutedEventArgs e)
 		{
 			if (updateValues)
+			{
 				Settings.userSettings.MOUSE_WHEEL = (bool)UI_Mood_ClickWheel.IsChecked;
+				Settings.MouseHookCheck();
+			}
 		}
 
 		private void UI_SOLO_AUTOLOAD_Checked(object sender, RoutedEventArgs e)

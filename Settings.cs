@@ -27,34 +27,59 @@ namespace WinSounds
 	}
 	class SoundModel
 	{
-		public WaveFileReader reader { get; set; }
-		public WaveOut waveOut { get; set; }
+		public WaveFileReader[] reader = new WaveFileReader[Settings.MAX_SOUNDS];
+		public WaveOut[] waveOut = new WaveOut[Settings.MAX_SOUNDS];
 
 		public SoundModel(string filePath)
 		{
-			reader = new WaveFileReader(filePath);
-			waveOut = new WaveOut();
+			for(int i = 0; i < reader.Length; i++)
+			{
+				reader[i] = new WaveFileReader(filePath);
+				waveOut[i] = new WaveOut();
 
-			waveOut.Init(reader);
+				waveOut[i].Init(reader[i]);
+			}
 		}
+
 		public void Play()
 		{
-			reader.Seek(0, SeekOrigin.Begin);
-			waveOut.Volume = Settings.userSettings.VOLUME;
-			waveOut.Play();
+			for (int i = 0; i < reader.Length; i++)
+			{
+				if (waveOut[i].PlaybackState != PlaybackState.Playing)
+				{
+					reader[i].Seek(0, SeekOrigin.Begin);
+					waveOut[i].Volume = Settings.userSettings.VOLUME;
+					waveOut[i].Play();
+					break;
+				}
+			}
 		}
-		public void Stop()
+		public void Stop(int index)
 		{
-			waveOut.Stop();
-			reader.Seek(0, SeekOrigin.Begin);
+			if (index >= 0 && index < waveOut.Length)
+			{
+				waveOut[index].Stop();
+				reader[index].Seek(0, SeekOrigin.Begin);
+			}
 		}
-		public void Clear()
+		public void StopAll()
 		{
-			waveOut.Stop();
-			waveOut.Dispose();
+			for (int i = 0; i < reader.Length; i++) Stop(i);
+		}
+		public void Dispose(int index)
+		{
+			if (index >= 0 && index < waveOut.Length)
+			{
+				waveOut[index].Stop();
+				waveOut[index].Dispose();
 
-			reader.Close();
-			reader.Dispose();
+				reader[index].Close();
+				reader[index].Dispose();
+			}
+		}
+		public void DisposeAll()
+		{
+			for (int i = 0; i < reader.Length; i++) Dispose(i);
 		}
 	}
 	public class UserSettings
@@ -78,6 +103,7 @@ namespace WinSounds
 	static class Settings
 	{
 		public static bool MUTE = false;
+		public const int MAX_SOUNDS = 3;
 
 		public static List<string> ignored_proc = new List<string>() { "Idle", "svhost", "WinSounds", "System", "Secure System", "Registry", "smss", "csrss" };
 		public static UserSettings userSettings = new UserSettings();
@@ -112,7 +138,11 @@ namespace WinSounds
 		//		serializer.Serialize(file, mood);
 		//	}
 		//}
-
+		public static void MouseHookCheck()
+		{
+			if (Settings.userSettings.CLICK || Settings.userSettings.MOUSE_WHEEL) Keyboard.Classes.Hook.MouseHook();
+			else Keyboard.Classes.Hook.MouseDisponse();
+		}
 		public static void SaveSettings()
 		{
 			using (StreamWriter file = File.CreateText("./UserSettings.json"))
@@ -150,7 +180,7 @@ namespace WinSounds
 		{
 			foreach(KeyValuePair<string, SoundModel> mood in currentMoodSounds)
 			{
-				mood.Value.Clear();
+				mood.Value.DisposeAll();
 			}
 			currentMoodSounds.Clear();
 			List<List<string>> sounds = new List<List<string>> {
