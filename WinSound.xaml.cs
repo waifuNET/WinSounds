@@ -128,7 +128,7 @@ namespace WinSounds
 
 			IEnumerable<string> bans = processCollection.Intersect(Settings.userSettings.IGNORED_PROCESSES);
 
-			Settings.MUTE = bans.ToArray().Length > 0;
+			Settings.MUTE_PROC = bans.ToArray().Length > 0;
 
 			foreach (string st in processFiltred)
 			{

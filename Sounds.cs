@@ -26,7 +26,6 @@ namespace WinSounds
 		}
 		public void MouseSoud(MouseButtons mouse)
 		{
-			if (Settings.MUTE) return;
 			switch (mouse)
 			{
 				case MouseButtons.Right:
@@ -42,7 +41,6 @@ namespace WinSounds
 		}
 		public void KeyBoardSound(int key)
 		{
-			if (Settings.MUTE) return;
 			switch (key)
 			{
 				case Keyboard.Classes.Keys.VK_BACK:
@@ -67,7 +65,6 @@ namespace WinSounds
 
 		public void WindowSound(WindowHookEnum status)
 		{
-			if (Settings.MUTE) return;
 			switch (status)
 			{
 				case WindowHookEnum.OPEN:
@@ -89,6 +86,8 @@ namespace WinSounds
 
 		public void PlaySound(string path)
 		{
+			if (Settings.MUTE || Settings.MUTE_PROC) return;
+
 			if (path == null) return;
 			foreach(KeyValuePair<string, SoundModel> sound in Settings.currentMoodSounds) if (Settings.userSettings.SOLO_TRACK) sound.Value.StopAll();
 			for (int i = 0; i < Settings.currentMoodSounds.Count; i++)

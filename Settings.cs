@@ -103,6 +103,7 @@ namespace WinSounds
 	static class Settings
 	{
 		public static bool MUTE = false;
+		public static bool MUTE_PROC = false;
 		public const int MAX_SOUNDS = 3;
 
 		public static List<string> ignored_proc = new List<string>() { "Idle", "svhost", "WinSounds", "System", "Secure System", "Registry", "smss", "csrss" };
